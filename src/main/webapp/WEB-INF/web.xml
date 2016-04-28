@@ -5,18 +5,7 @@
 	version="3.0">
 	<!-- General description of your web application -->
 	<display-name>springmvc</display-name>
-	
-	<listener>
-		<listener-class>
-                  org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-	</listener>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring-core-config.xml</param-value>
-	</context-param>
-	
 	<servlet>
 		<servlet-name>hello-dispatcher</servlet-name>
 		<servlet-class>
@@ -24,7 +13,9 @@
                 </servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring-web-config.xml</param-value>
+			<param-value>
+				/WEB-INF/springmvc-servlet.xml,/WEB-INF/mybatisDaoSource.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -51,4 +42,9 @@
 	     <filter-name>encodingFilter</filter-name>
 	     <url-pattern>/*</url-pattern>
 	  </filter-mapping>
+	  
+	  <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/wiews/jsp/exception.jsp</location>
+  	 </error-page>
 </web-app>

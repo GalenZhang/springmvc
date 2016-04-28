@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd ">
+
+	<context:component-scan base-package="com.achievo"  annotation-config="true"/>
+	
+	<mvc:annotation-driven conversion-service="myDateConverter"/>
+	
+	<!--<bean id ="myDateFormatter" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+    <!--<property name="formatters">-->
+    <!--<set>-->
+    <!--<bean class="com.imooc.common.MyDateFormatter"></bean>-->
+    <!--</set>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+	<bean id="myDateConverter" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="com.achievo.springmvc.common.MyDateConverter"></bean>
+				<bean class="org.springframework.core.convert.support.StringToBooleanConverter"></bean>
+			</set>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<mvc:annotation-driven />
+
+</beans>
